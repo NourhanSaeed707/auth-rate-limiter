@@ -38,7 +38,6 @@ public class AuthenticationService {
                     .status(409)
                     .build();
         }
-        Role role = roleRepository.findByName(request.getRole());
         var user = UserEntity.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -48,9 +47,11 @@ public class AuthenticationService {
                 .gender(request.getGender())
                 .address(request.getAddress())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(role)
+                .role(null)
                 .build();
         userRepository.save(user);
+        Role role = Role.builder().name(request.getRole()).user(user).build();
+        roleRepository.save(role);
         var jwtToken = jwtService.generateToken(user);
         ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
                 .httpOnly(true)

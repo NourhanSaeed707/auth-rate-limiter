@@ -45,7 +45,7 @@ public class UserEntity implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Mother mother;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Role role;
 
     @Override
