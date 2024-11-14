@@ -50,9 +50,11 @@ public class AuthenticationService {
     public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO request, HttpServletResponse response) {
         try {
             Authentication authentication = authenticateUser(request);
+            System.out.println("authenticaaaaaaaaate res: " + authentication);
             UserEntity user = getUserByEmail(request.getEmail());
 
             String jwtToken = jwtService.generateToken(user);
+            System.out.println("tokeeeeeeeeen: " + jwtToken);
             addTokenToResponse(response, jwtToken);
 
             return AuthenticationResponseDTO.builder().token(jwtToken).status(200).build();
@@ -87,6 +89,7 @@ public class AuthenticationService {
     }
 
     private Authentication authenticateUser(AuthenticationRequestDTO request) {
+        System.out.println("authenticate useeeeeeer method: " + request);
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),

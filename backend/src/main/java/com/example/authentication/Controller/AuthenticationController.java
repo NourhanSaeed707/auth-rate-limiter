@@ -23,7 +23,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponseDTO> authenticate (@RequestBody AuthenticationRequestDTO request, HttpServletResponse response) {
         AuthenticationResponseDTO authenticationResponse = authenticationService.authenticate(request,response);
-        return ResponseEntity.ok(authenticationService.authenticate(request,response));
+        return ResponseEntity.ok(authenticationResponse);
     }
 //    @GetMapping("/user")
 //    public ResponseEntity<Optional<UserEntity>> getUserInfo() {

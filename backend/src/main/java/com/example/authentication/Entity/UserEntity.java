@@ -11,7 +11,6 @@ import java.util.*;
 
 @Entity(name = "users")
 @Getter
-@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -51,11 +50,38 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.getClass().getName()));
+        return List.of(new SimpleGrantedAuthority(role.getName().name()));
     }
 
     @Override
     public String getUsername() {
         return email;
     }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
 }

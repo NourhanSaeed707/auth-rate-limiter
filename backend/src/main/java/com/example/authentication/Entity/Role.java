@@ -1,4 +1,5 @@
 package com.example.authentication.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,5 +19,7 @@ public class Role {
 
     @OneToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private UserEntity user;
+
 }
