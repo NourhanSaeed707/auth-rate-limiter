@@ -40,6 +40,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "address", nullable = false)
     private String address;
     @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
