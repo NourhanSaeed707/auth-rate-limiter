@@ -44,8 +44,7 @@ public class UserEntity implements UserDetails {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Mother mother;
-    @OneToOne(mappedBy = "user" , cascade = CascadeType.ALL)
-    private Child child;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Role role;
 
