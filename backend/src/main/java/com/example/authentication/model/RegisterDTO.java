@@ -1,6 +1,7 @@
 package com.example.authentication.model;
 import com.example.authentication.Entity.Gender;
 import com.example.authentication.Entity.Role;
+import com.example.authentication.Entity.RoleEnum;
 import lombok.*;
 
 @Data
@@ -24,5 +25,5 @@ public class RegisterDTO {
     private Gender gender;
 
     private String address;
-    private Role role;
+    private RoleEnum role;
 }

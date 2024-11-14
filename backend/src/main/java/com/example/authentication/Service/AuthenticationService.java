@@ -1,10 +1,13 @@
 package com.example.authentication.Service;
+import com.example.authentication.Entity.Role;
 import com.example.authentication.Entity.UserEntity;
+import com.example.authentication.Repository.RoleRepository;
 import com.example.authentication.Repository.UserRepository;
 import com.example.authentication.model.AuthenticationRequestDTO;
 import com.example.authentication.model.AuthenticationResponseDTO;
 import com.example.authentication.model.RegisterDTO;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -23,9 +26,19 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final RoleRepository roleRepository;
 
 
+    @Transactional
     public AuthenticationResponseDTO register(RegisterDTO request, HttpServletResponse response) {
+        if(userRepository.findByEmail(request.getEmail()).isPresent()) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT); // 409 Conflict
+            return AuthenticationResponseDTO.builder()
+                    .message("Email already in use")
+                    .status(409)
+                    .build();
+        }
+        Role role = roleRepository.findByName(request.getRole());
         var user = UserEntity.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -33,8 +46,9 @@ public class AuthenticationService {
                 .country(request.getCountry())
                 .city(request.getCity())
                 .gender(request.getGender())
+                .address(request.getAddress())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
+                .role(role)
                 .build();
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

@@ -40,6 +40,6 @@ public class SecurityConfig  {
     @Bean
     public JwtDecoder jwtDecoder() {
         var secretkey = new SecretKeySpec(jwtSecretKey.getBytes(), "");
-        return NimbusJwtDecoder.withSecretKey(secretkey).macAlgorithm(MacAlgorithm.HS256).build();
+        return NimbusJwtDecoder.withSecretKey(secretkey).build();
     }
 }

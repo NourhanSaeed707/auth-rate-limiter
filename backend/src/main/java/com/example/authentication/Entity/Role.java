@@ -1,7 +1,13 @@
 package com.example.authentication.Entity;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity(name = "roles")
+@Getter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

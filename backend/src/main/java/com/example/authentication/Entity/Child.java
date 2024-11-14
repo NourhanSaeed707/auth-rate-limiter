@@ -1,8 +1,14 @@
 package com.example.authentication.Entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity(name = "kids")
+@Getter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Child {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
