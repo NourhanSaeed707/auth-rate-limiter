@@ -87,7 +87,6 @@ public class AuthenticationService {
     }
 
     private Authentication authenticateUser(AuthenticationRequestDTO request) {
-        System.out.println("authenticate useeeeeeer method: " + request);
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),

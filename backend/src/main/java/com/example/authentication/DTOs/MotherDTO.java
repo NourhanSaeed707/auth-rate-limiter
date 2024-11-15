@@ -1,6 +1,4 @@
 package com.example.authentication.DTOs;
-import lombok.*;
-
 
 public class MotherDTO extends BasicDTO{
     private String mobile;
