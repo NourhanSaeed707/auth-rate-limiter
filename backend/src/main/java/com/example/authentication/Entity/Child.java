@@ -20,4 +20,8 @@ public class Child {
     @ManyToOne
     @JoinColumn(name = "mother_id")
     private Mother mother;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }
