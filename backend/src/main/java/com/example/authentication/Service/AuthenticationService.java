@@ -1,5 +1,4 @@
 package com.example.authentication.Service;
-
 import com.example.authentication.Entity.Role;
 import com.example.authentication.Entity.RoleEnum;
 import com.example.authentication.Entity.UserEntity;
@@ -30,6 +29,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final RoleRepository roleRepository;
+    private final RateLimiterService rateLimiterService;
 
     @Transactional
     public AuthenticationResponseDTO register(RegisterDTO request, HttpServletResponse response) {
@@ -48,6 +48,11 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO request, HttpServletResponse response) {
+        String rateLimiterKey = "login: " + request.getEmail();
+        if (!rateLimiterService.tryConsume(rateLimiterKey)) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return AuthenticationResponseDTO.builder().message("Too many login requests").status(429).build();
+        }
         try {
             Authentication authentication = authenticateUser(request);
             UserEntity user = getUserByEmail(request.getEmail());
