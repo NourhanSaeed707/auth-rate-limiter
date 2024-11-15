@@ -1,8 +1,8 @@
 package com.example.authentication.Controller;
 import com.example.authentication.Service.AuthenticationService;
-import com.example.authentication.model.AuthenticationRequestDTO;
-import com.example.authentication.model.AuthenticationResponseDTO;
-import com.example.authentication.model.RegisterDTO;
+import com.example.authentication.DTOs.AuthenticationRequestDTO;
+import com.example.authentication.DTOs.AuthenticationResponseDTO;
+import com.example.authentication.DTOs.RegisterDTO;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,5 @@
-package com.example.authentication.model;
+package com.example.authentication.DTOs;
 import com.example.authentication.Entity.Gender;
-import com.example.authentication.Entity.Role;
 import com.example.authentication.Entity.RoleEnum;
 import lombok.*;
 
